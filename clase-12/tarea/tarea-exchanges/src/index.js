@@ -1,81 +1,85 @@
-
-fetch("https://api.exchangeratesapi.io/latest")
-    .then(respuesta => respuesta.json())
-    .then(respuestaJSON => añadirBases(respuestaJSON))
-    
+/// <reference types="jquery"/>
 
 
 
-document.querySelector("#convertir").onclick = ()=>{
-    document.querySelector("#devolucion-monedas").innerHTML=""
+$.ajax({
+    method: "GET",
+    url: "https://api.exchangeratesapi.io/latest",
+    success: respuesta => {
+        añadirBases(respuesta)
+    },
+    error: error=>{
+        const alerta=$(`<div class="alert alert-danger" role="alert" id="datos-incorrectos">
+        La base de datos se escuentra caida, intentalo mas tarde. Lo sentimos </div>`)
 
-    const fecha=document.querySelector("#fecha").value
-    const monedaBase=document.querySelector("#listado-bases").value
+        $("form").append(alerta)
+    }
 
-    const url=`https://api.exchangeratesapi.io/${fecha}?base=${monedaBase}`
+})
+
+
+
+$("#convertir").click(()=>{
+    $("#devolucion-monedas").empty()
+
+    const fecha=$("#fecha").val()
+    const monedaBase=$("#listado-bases").val()
+
+    const URL=`https://api.exchangeratesapi.io/${fecha}?base=${monedaBase}`
 
     if(validarInputs(fecha, monedaBase)){
 
-        if(document.querySelector("#datos-incorrectos")){
-            document.querySelector("#datos-incorrectos").remove()
+        if($("#datos-incorrectos")){
+            $("#datos-incorrectos").detach()
         }
 
-        fetch(url)
-            .then(respuesta => respuesta.json())
-            .then(respuestaJSON => {
-                debugger
-
-                Object.keys(respuestaJSON.rates).forEach(moneda => {
-                    const li=document.createElement("li")
-                    li.innerText=`${moneda}: ${respuestaJSON.rates[moneda]}`
-
-
-                    document.querySelector("#devolucion-monedas").appendChild(li)
+        $.ajax({
+            method: "GET",
+            url: URL,
+            success: respuesta => {
+                Object.keys(respuesta.rates).forEach(moneda => {
+    
+                    $("#devolucion-monedas").append(
+                        $(`<li>${moneda}: ${respuesta.rates[moneda]}</li>`))
                 })
-            })
-            .catch(error => {
- 
-                const alerta=document.createElement("div")
-                alerta.className="alert alert-danger"
-                alerta.role="alert"
-                alerta.id="datos-incorrectos"
-                alerta.textContent=`No pudimos obtener los datos de esa fecha y con esa base. Lo sentimos`
+            },
+            error: error => {
+                const alerta=$(`<div class="alert alert-danger" role="alert" id="datos-incorrectos">
+                No pudimos obtener los datos de esa fecha y con esa base. Lo sentimos </div>`)
         
-                document.querySelector("form").appendChild(alerta)
-                 
+                $("form").append(alerta)
+            }
+        })
 
-            })
     }else{
-        if(!document.querySelector("#datos-incorrectos")){
-            const alerta=document.createElement("div")
-            alerta.className="alert alert-danger"
-            alerta.role="alert"
-            alerta.id="datos-incorrectos"
-            alerta.textContent="Los datos ingresados son incorrectos. Intentelo nuevamente"
 
-            document.querySelector("form").appendChild(alerta)
-        } 
+        $("#datos-incorrectos").detach()
+
+        const alerta=$(`<div class="alert alert-danger" role="alert" id="datos-incorrectos">
+        Los datos ingresados son incorrectos. Intentelo nuevamente </div>`)
+
+        $("form").append(alerta)
+         
     }
         
         
-}
+})
 
 function añadirBases(respuestaJSON){
-    const lista = document.querySelector("#listado-bases")
+    const lista = $("#listado-bases")
 
     function agregarBase(base){
-        const optionMoneda = document.createElement("option")
-        optionMoneda.textContent=base
+        const optionMoneda = $(`<option>${base}</option>`)
 
-        lista.appendChild(optionMoneda)
+        lista.append(optionMoneda)
     }
+
     agregarBase(respuestaJSON.base)
 
     Object.keys(respuestaJSON.rates).forEach(e => {
-        const optionMoneda = document.createElement("option")
-        optionMoneda.textContent=e
+        const optionMoneda = $(`<option>${e}</option>`)
 
-        lista.appendChild(optionMoneda)
+        lista.append(optionMoneda)
     })
 }
 
