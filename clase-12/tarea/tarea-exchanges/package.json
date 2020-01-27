@@ -9,9 +9,11 @@
   "author": "Mauro",
   "license": "ISC",
   "devDependencies": {
+    "@types/jquery": "^3.3.31",
     "cypress": "^3.8.2"
   },
   "dependencies": {
-    "bootstrap": "^4.4.1"
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1"
   }
 }
