@@ -1,0 +1,21 @@
+.centrado{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 100px;
+}
+
+.pokemon{
+    height: 150px;
+}
+
+#contenedor-cartas-hijo{
+    margin-bottom: 10px;
+}
+
+#carta{
+    background-color: #F8F6F5 ;
+}
+
+body{
+    background-color: #F38653 ;
+}
