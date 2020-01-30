@@ -1,76 +1,57 @@
 /// <reference types="jquery"/>
 
-const URL="https://pokeapi.co/api/v2/pokemon/"
+let URLprimera="https://pokeapi.co/api/v2/pokemon/"
+let URLsegunda
 
 
-function agregarTarjetas(){
+function agregarTarjetas(URL){
     $.ajax({
         method: "GET",
         url: URL,
         success: respuesta => {
-            //console.log(respuesta)
 
             const contenedorTarjetas = $("#contenerdor-cartas-padre")
 
             Object.values(respuesta.results).forEach(e=>{
                 
-                obtenerDatosPokemon(e)
-                //agregarCartaPokemon(e)
-                
-                
+                agregarCartaPokemon(e)  
             })
+
+            URLsegunda=respuesta.next
+
+
+            if($(".card").length===20){
+                agregarTarjetas(URLsegunda)
+            }
+            
+            if($(".card").length===40){
+                mostrarPokemon()
+            }
+            
+
 
         },
     })
 }
 
-agregarTarjetas()
+function agregarCartaPokemon(pokemon){
 
-function obtenerDatosPokemon(pokemon){
-    let datosPokemon={
-        nombre: pokemon.name,
-        foto: "",
-        type: [],
-    }
-
-    const URLpokemon = pokemon.url
-
-    $.ajax({
-        method: "GET",
-        url: URLpokemon,
-        success: respuesta => {
-
-            datosPokemon.foto=respuesta.sprites.front_default
-
-            Object.values(respuesta.types).forEach(slotType => {
-                
-                datosPokemon.type.push(slotType.type.name)
-                
-            })
-
-            agregarCartaPokemon(datosPokemon)
-        },
-    })
-
-}
-
-
-
-function agregarCartaPokemon(datosPokemon){
-
-
-    const cartaHTML = $(`<div class="col" id="contenedor-cartas-hijo">
-        <div class="card" id="carta">    
-            <img src=${datosPokemon.foto} class="card-image-top pokemon" alt=${datosPokemon.nombre}>
-            <div class="card-body">
-                <h5 class="card-tittle">${datosPokemon.nombre}</h5>
-                <p class="card-text">${datosPokemon.type}</p>
-                <a href="#" class="btn btn-primary">Ver</a>
-            </div>
-        </div>    
+    const cartaHTML = $(`<div class="col">
+        <div class="card border-primary">
+            <div class="card-body" id="carta-pokemon">${pokemon.name.toUpperCase()}</div>
+        </div>
     </div>`)
-
 
     $("#contenerdor-cartas-padre").append(cartaHTML)
 }
+
+function mostrarPokemon(){
+    $(".card").click(e=>{
+        //crear carta del pokemon y hacer un get de los datos e introducirlos en la carta, mostrar la carta
+    })
+}
+
+agregarTarjetas(URLprimera)
+
+
 

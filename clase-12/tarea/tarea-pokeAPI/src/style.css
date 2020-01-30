@@ -4,18 +4,13 @@
     font-size: 100px;
 }
 
-.pokemon{
-    height: 150px;
+
+#carta-pokemon{
+    text-align: center;
 }
 
-#contenedor-cartas-hijo{
-    margin-bottom: 10px;
-}
-
-#carta{
-    background-color: #F8F6F5 ;
-}
-
-body{
-    background-color: #F38653 ;
+.card{
+    margin-bottom: 15px;
+    background-color: #97B6E6;
+    cursor: pointer;
 }
