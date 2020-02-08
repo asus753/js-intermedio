@@ -10,32 +10,45 @@
     </head>
 
     <body>
-        <div class="container">
-            <h1 class="centrado" id="titulo">Pokedex</h1>
+      
 
-            <form>
-                <div class="row row-cols-1 row-cols-md-5" id="contenerdor-cartas-padre">
+      
+      <div class="container">
+        <h1 class="centrado" id="titulo">Pokedex</h1>
+        
 
-                </div>
-            </form>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Pokemon ej: pikachu" aria-label="Pokemon ej:pikachu" aria-describedby="button-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button" id="boton-buscar">Button</button>
+          </div>
         </div>
+        
+        <h4 class="centrado" id="pagina">Pagina 1</h4>
+
+        <div class="row row-cols-1 row-cols-md-5" id="contenedor-cartas-padre">
+
+        </div>
+
+        <h3 class="centrado" id="cargando">Cargando...</h3>
+      </div>
 
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              <li class="page-item disabled" id="padre-anterior">
+                <a class="page-link" href="#" id="anterior" tabindex="-1" aria-disabled="true">Previous</a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">...</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+              <li class="page-item" id="padre-siguiente">
+                <a class="page-link" href="#" id="siguiente">Next</a>
               </li>
             </ul>
         </nav>
 
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+        
+        <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
         <script type="text/javascript" src="src/index.js"></script>
     </body>
 </html>
