@@ -1,16 +1,33 @@
-.centrado{
-    text-align: center;
+h1{
     font-family: 'Montserrat', sans-serif;
     font-size: 100px;
 }
-
-
-#carta-pokemon{
+.centrado{
     text-align: center;
 }
+.centrado-modal{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 
 .card{
     margin-bottom: 15px;
     background-color: #97B6E6;
     cursor: pointer;
+}
+
+#img-pokemon{
+    height: 250px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.type-img{
+    
+    height: 80px;
+    width: 80px;
 }
