@@ -15,7 +15,7 @@ let cantidadTotalPokemons
 function agregarTarjetas(URL){
 
     if($("#cargando").text()===""){
-        $(".container").append('<h3 class="centrado" id="cargando">Cargando...</h3>')
+        $(".container").append('<h3 class="centrado" id="cargando">Loading...</h3>')
     }
    
     $.ajax({
@@ -115,7 +115,7 @@ function obtenerDatosPokemon(urlPokemon){
                 success: (respuesta => {
                     for (let index = respuesta.flavor_text_entries.length - 1 ; index >= 0; index--) {
 
-                        if(respuesta.flavor_text_entries[index].language.name==="es"){
+                        if(respuesta.flavor_text_entries[index].language.name==="en"){
 
                             datosTotalesPokemon.description = respuesta.flavor_text_entries[index].flavor_text
                         }
@@ -177,7 +177,7 @@ $(".page-link").click((boton)=>{
             debugger
             $("#padre-siguiente").addClass("disabled")}
 
-        $("#pagina").text(`Pagina ${contadorPaginacion}`)
+        $("#pagina").text(`Page ${contadorPaginacion}`)
         
     }else if(boton.target.text ==="Previous"){
 
@@ -189,7 +189,7 @@ $(".page-link").click((boton)=>{
 
         agregarTarjetas(URLanterior)
 
-        $("#pagina").text(`Pagina ${contadorPaginacion}`)
+        $("#pagina").text(`Page ${contadorPaginacion}`)
 
 
     }
