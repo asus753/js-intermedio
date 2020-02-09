@@ -32,15 +32,18 @@ function agregarTarjetas(URL){
            
             if($(".card").length===40){
                 $("#cargando").detach()
-                mostrarInfoPokemon()
+                definirClickCarta()
 
                 URLsiguiente=respuesta.next
                 URLanterior=respuesta.previous
             }
             
-
-
         },
+        error: ()=>{
+            $("#cargando").text("Lo sentimos, el servidor se encuentra caido.")
+            $("#navegation").detach()
+            $("#pagina").detach()
+        }
     })
 }
 
@@ -55,33 +58,35 @@ function agregarCartaPokemon(pokemon){
     $("#contenedor-cartas-padre").append(nombrePokemon)
 }
 
-function mostrarInfoPokemon(datosPokemon){
-    $(".card").click(e=>{
-        const URLpokemon=`${URLparaPokemon}${e.target.innerText.toLowerCase()}/`
+function mostrarInfoPokemon(nombrePokemon){
+
+    const URLpokemon=`${URLparaPokemon}${nombrePokemon}/`
         
 
-        const modalPokemon= $(`<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title centrado-modal" id="exampleModalCenterTitle">Cargando...</h5>
-            </div>
-          </div>
+    const modalPokemon= $(`<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title centrado-modal" id="exampleModalCenterTitle">Cargando...</h5>
         </div>
-        </div>`)
+        </div>
+    </div>
+    </div>`)
 
-      $("body").prepend(modalPokemon)
+    $("body").prepend(modalPokemon)
 
-      $("#exampleModalCenter").modal("show")
+    $("#exampleModalCenter").modal("show")
 
-      obtenerDatosPokemon(URLpokemon)
 
-    })
-
-    
-
+    obtenerDatosPokemon(URLpokemon)
 
 }
+
+function definirClickCarta(){
+    $(".card").click((e)=>{
+        mostrarInfoPokemon(e.target.innerText.toLowerCase())
+    })
+}    
 
 function obtenerDatosPokemon(urlPokemon){
     let datosTotalesPokemon
@@ -94,7 +99,6 @@ function obtenerDatosPokemon(urlPokemon){
             datosTotalesPokemon={
                 name: respuesta.forms[0].name,
                 front_image: respuesta.sprites.front_default,
-                back_image: respuesta.sprites.back_default,
                 types: [],
                 height: respuesta.height,
                 weight: respuesta.weight,
@@ -118,17 +122,24 @@ function obtenerDatosPokemon(urlPokemon){
                     }
 
                     $(".modal-title").text(datosTotalesPokemon.name)
+
                     $(".modal-content").append(`<div class="modal-body">
                         <img src=${datosTotalesPokemon.front_image} alt=${datosTotalesPokemon.name} id="img-pokemon"></img>
                     </div>`)
-                    $(".modal-content").append(`<div class="modal-body">${datosTotalesPokemon.description}</div>`)
-                    $(".modal-content").append(`<div class="modal-body centrado" id="types"></div>`)
 
-                    $("#types").append(`<div><h5>Type: </label></h5>`)
+                    $(".modal-content").append(`<div class="modal-body">${datosTotalesPokemon.description}</div>`)
+
+                    $(".modal-content").append(`<div class="modal-body centrado" id="stats">
+                        <b>Height: </b><label>${datosTotalesPokemon.height}</label>
+                            <b>Weight: </b><label>${datosTotalesPokemon.weight}</label>
+                    </div>"`)
+
+
+                    $(".modal-content").append(`<div class="modal-body centrado" id="types"></div>`)
+                    $("#types").append(`<h5>Type: </h5>`)
                     datosTotalesPokemon.types.forEach((e)=>{  
                         $("#types").append(`<img class="type-img" title=${e} src="types_images/${e}.jpg">`)
                     })
-
 
 
                     $(".modal-content").append(`<div class="modal-footer">
@@ -138,6 +149,12 @@ function obtenerDatosPokemon(urlPokemon){
                 })
             })
 
+        }),
+        error: (()=>{
+            $(".modal-title").text("No hemos podido encontrar ese pokemon, revise el nombre y reintentelo")
+            $(".modal-content").append(`<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>`)
         })
     })
 
@@ -177,12 +194,18 @@ $(".page-link").click((boton)=>{
 
     }
 
+})
 
-    //Configurar barra de busqueda
+$("#boton-buscar").click(()=>{
+    const nombrePokemon=$("#search-pokemon").val().toLowerCase()
+
+    mostrarInfoPokemon(nombrePokemon)
 
 })
 
+
 agregarTarjetas(URLprimera)
+
 
 
 

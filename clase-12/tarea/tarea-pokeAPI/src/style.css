@@ -5,6 +5,7 @@ h1{
 .centrado{
     text-align: center;
 }
+
 .centrado-modal{
     margin-left: auto;
     margin-right: auto;
@@ -30,4 +31,11 @@ h1{
     
     height: 80px;
     width: 80px;
+}
+
+#stats{
+    padding-bottom: inherit;
+}
+#types{
+    padding-top: inherit;
 }
