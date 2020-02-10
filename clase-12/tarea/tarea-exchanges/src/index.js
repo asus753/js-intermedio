@@ -37,10 +37,20 @@ $("#convertir").click(()=>{
             method: "GET",
             url: URL,
             success: respuesta => {
+                
                 Object.keys(respuesta.rates).forEach(moneda => {
-    
-                    $("#devolucion-monedas").append(
-                        $(`<li>${moneda}: ${respuesta.rates[moneda]}</li>`))
+                    
+                    if(moneda!==respuesta.base){
+                        $("#devolucion-monedas").append(
+                            $(`<div class="col">
+                                <div class="card text-center border-dark">
+                                    <p style="margin: 12px;">
+                                        <strong>${moneda} :</strong>
+                                        <label style="margin: 0px;">${respuesta.rates[moneda].toFixed(2)}</label>
+                                    </p>
+                                </div>
+                        </div>`))
+                    }
                 })
             },
             error: error => {
@@ -88,3 +98,5 @@ function validarInputs(fecha, moneda){
         return true
     }
 }
+//Cortar equivalencias a 3 decimales
+//Crear tipo cartas para la presentacion de las equivalencias
