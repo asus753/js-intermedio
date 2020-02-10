@@ -1,18 +1,19 @@
 #div-base{
     margin-bottom: 10px;
 }
+
 body{
     background-color:  #8a8a82;
 }
 
 .centrado{
-    text-align: center;
+    text-align: center;   
 }
 
+.card{
+    margin-bottom: 13px;
+}
 
-ul {
-    margin-left: 10%;
-    margin-top: 20px;
-    columns: 3;
-    -moz-columns: 3;
+#devolucion-monedas{
+    margin-top: 30px;
 }
