@@ -80,3 +80,6 @@ function añadirBases (respuestaJSON) {
     lista.append(optionMoneda)
   })
 }
+
+// Dividir el codigo en modulos: 1) Que unicamente interactue con la API
+// 2) Que unicamente interactue con la interfaz de la pagina

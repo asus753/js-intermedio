@@ -2,10 +2,12 @@
     "env": {
         "browser": true,
         "es6": true,
-        "jquery": true
+        "jquery": true,
+        "cypress/globals": true
     },
     "extends": [
-        "standard"
+        "standard",
+        "plugin:cypress/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -15,5 +17,8 @@
         "ecmaVersion": 2018
     },
     "rules": {
+        "cypress/no-assigning-return-values": "error",
+        "cypress/no-unnecessary-waiting": "error",
+        "cypress/assertion-before-screenshot": "warn"
     }
 }
