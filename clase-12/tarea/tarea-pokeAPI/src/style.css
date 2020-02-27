@@ -39,3 +39,7 @@ h1{
 #types{
     padding-top: inherit;
 }
+
+.noClick {
+    pointer-events: none;
+ }

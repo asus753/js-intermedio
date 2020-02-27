@@ -10,7 +10,7 @@ let URLanterior
 let contadorPaginacion = 1
 
 let cantidadTotalPokemons
-/*
+
 function agregarTarjetas (URL) {
   if ($('#cargando').text() === '') {
     $('.container').append('<h3 class="centrado" id="cargando">Loading...</h3>')
@@ -50,7 +50,7 @@ function agregarCartaPokemon (pokemon) {
     </div>`)
 
   $('#contenedor-cartas-padre').append(nombrePokemon)
-} */
+}
 
 function mostrarInfoPokemon (nombrePokemon) {
   const URLpokemon = `${URLparaPokemon}${nombrePokemon}/`
