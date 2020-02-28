@@ -1,6 +1,5 @@
 /// <reference types="jquery"/>
 
-
 export function corregirURL (cantPokemons) {
   const offset = cantPokemons - 40 - ($('.card').length)
   const URLcorregida = `https://pokeapi.co/api/v2/pokemon/?limit=40&offset=${offset}`
@@ -19,4 +18,3 @@ export function obtenerURLpokemonUnico (nombre) {
 
   return url
 }
-

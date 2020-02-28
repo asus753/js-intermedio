@@ -1,10 +1,9 @@
 /// <reference types="jquery"/>
 
-import { agregarInfoAlModal, mostrarModal, mostrarErrorModal } from './interfaz.js'
+import { agregarInfoAlModal, mostrarModal, mostrarErrorModal } from './modal.js'
 
 export function obtenerDatosPokemon (nombre) {
   mostrarModal()
-
   $.ajax({
     method: 'GET',
     url: `https://pokeapi.co/api/v2/pokemon/${nombre}`,
@@ -37,14 +36,14 @@ async function almacenarDatosPokemon (datos) {
         datosTotalesPokemon.types.push(datos.types[e].type.name)
       })
 
-      datosTotalesPokemon.description = obtenerEnIngles(descripcion)
+      datosTotalesPokemon.description = obtenerDescEnIngles(descripcion)
 
       agregarInfoAlModal(datosTotalesPokemon)
     }
   })
 }
 
-function obtenerEnIngles (descripciones) {
+function obtenerDescEnIngles (descripciones) {
   const cantidadDescrip = descripciones.flavor_text_entries.length
   for (let index = 0; index <= cantidadDescrip; index++) {
     if (descripciones.flavor_text_entries[index].language.name === 'en') {

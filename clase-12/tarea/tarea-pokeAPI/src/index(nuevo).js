@@ -1,14 +1,14 @@
 /// <reference types="jquery"/>
 import {
-  mostrarCargando,
+  mostrarCargandoPagina,
   agregarCartaPokemon,
   manejarBotones,
-  setNumeroPagina
+  setNumeroPagina,
+  mostrarErrorServidor
 } from './interfaz.js'
 import { obtenerDatosPokemon } from './pokeAPI.js'
-import { corregirURL, testURLdañada } from './varios.js'
+import { corregirURL, testURLdañada } from './url.js'
 
-export const URLparaPokemon = 'https://pokeapi.co/api/v2/pokemon/'
 const URLprimera = 'https://pokeapi.co/api/v2/pokemon/?limit=40'
 
 let CantidadTotalPokemons
@@ -16,7 +16,7 @@ let URLanterior
 let URLsiguiente
 
 export async function cargarCartas (url) {
-  mostrarCargando()
+  mostrarCargandoPagina()
   $.ajax({
     method: 'GET',
     url: url,
@@ -37,10 +37,7 @@ export async function cargarCartas (url) {
       clickCarta()
     },
     error: () => {
-      // Meter todo esto dentro de una funcion
-      $('#cargando').text('Lo sentimos, el servidor se encuentra caido.')
-      $('#navegation').detach()
-      $('#pagina').detach()
+      mostrarErrorServidor()
     }
   })
 }
@@ -73,8 +70,7 @@ $('#padre-anterior').click((e) => {
 cargarCartas(URLprimera)
 
 $('#boton-buscar').click(() => {
-  const nombrePasado = $('#search-pokemon').val().toLowerCase()
+  const nombrePasado = $('#input-pokemon').val().toLowerCase()
   obtenerDatosPokemon(nombrePasado)
 })
 
-// Revisar nombres y ubicacion de funciones
