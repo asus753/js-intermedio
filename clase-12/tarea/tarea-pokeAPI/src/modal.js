@@ -16,8 +16,8 @@ export async function agregarInfoAlModal (datosPokemon) {
   $('.modal-content').append(`<div class="modal-body">${datosPokemon.description}</div>`)
 
   $('.modal-content').append(`<div class="modal-body centrado" id="stats">
-                          <b>Height: </b><label>${datosPokemon.height}</label>
-                              <b>Weight: </b><label>${datosPokemon.weight}</label>
+                          <b>Height: </b><label>${(datosPokemon.height) * 10}Cm</label>
+                              <b>Weight: </b><label>${(datosPokemon.weight) / 10}Kg</label>
                       </div>"`)
 
   $('.modal-content').append('<div class="modal-body centrado" id="types"></div>')
