@@ -3,7 +3,7 @@
 export function corregirURL (cantPokemons) {
   const offset = cantPokemons - 40 - ($('.card').length)
   const URLcorregida = `https://pokeapi.co/api/v2/pokemon/?limit=40&offset=${offset}`
-
+  $('#contenedor-cartas-padre').empty()
   return URLcorregida
 }
 
