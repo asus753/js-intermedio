@@ -7,11 +7,11 @@ import {
   mostrarErrorServidor
 } from './interfaz.js'
 import { obtenerDatosPokemon } from './pokeAPI.js'
-import { corregirURL, testURLdañada } from './url.js'
+import { corregirURL, testURLdanada } from './url.js'
 
 const URLprimera = 'https://pokeapi.co/api/v2/pokemon/?limit=40'
 
-let CantidadTotalPokemons
+let cantidadTotalPokemons
 let URLanterior
 let URLsiguiente
 
@@ -21,8 +21,8 @@ export async function cargarCartas (url) {
     method: 'GET',
     url: url,
     success: respuesta => {
-      if (CantidadTotalPokemons == null) {
-        CantidadTotalPokemons = respuesta.count
+      if (cantidadTotalPokemons == null) {
+        cantidadTotalPokemons = respuesta.count
       }
 
       Object.values(respuesta.results).forEach(e => {
@@ -34,7 +34,7 @@ export async function cargarCartas (url) {
       URLsiguiente = respuesta.next
 
       $('#cargando').detach()
-      clickCarta()
+      definirManejadorClickCarta()
     },
     error: () => {
       mostrarErrorServidor()
@@ -42,7 +42,7 @@ export async function cargarCartas (url) {
   })
 }
 
-async function clickCarta () {
+function definirManejadorClickCarta () {
   $('.card').click((e) => {
     const nombrePokemon = e.target.innerText.toLowerCase()
     obtenerDatosPokemon(nombrePokemon)
@@ -56,9 +56,9 @@ $('#padre-siguiente').click((e) => {
 })
 
 $('#padre-anterior').click((e) => {
-  if (testURLdañada(URLanterior, URLsiguiente)) {
+  if (testURLdanada(URLanterior, URLsiguiente)) {
     setNumeroPagina(e.target.innerText)
-    cargarCartas(corregirURL(CantidadTotalPokemons))
+    cargarCartas(corregirURL(cantidadTotalPokemons))
   } else {
     $('#contenedor-cartas-padre').empty()
     setNumeroPagina(e.target.innerText)

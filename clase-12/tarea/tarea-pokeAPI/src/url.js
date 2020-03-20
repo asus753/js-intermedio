@@ -7,7 +7,7 @@ export function corregirURL (cantPokemons) {
   return URLcorregida
 }
 
-export function testURLdañada (urlAnterior, urlSiguiente) {
+export function testURLdanada (urlAnterior, urlSiguiente) {
   if (urlAnterior.indexOf('limit=40') === -1 && urlSiguiente === null) {
     return true
   }
