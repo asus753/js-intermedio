@@ -28,7 +28,7 @@ $('#convertir').click(async () => {
       AgregarTarjetasCambios(respuesta)
     },
     error: () => {
-      $('form').append(errorFetch())
+      $('form').append(errorFetch)
     }
   })
 })

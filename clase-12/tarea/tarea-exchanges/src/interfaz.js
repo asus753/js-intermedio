@@ -54,11 +54,8 @@ export function AgregarTarjetasCambios (cambios) {
 
 }
 
-export function errorFetch () {
-  const alerta = $(`<div class="alert alert-danger" role="alert" id="datos-incorrectos">
-                No pudimos obtener los datos de esa fecha y con esa base. Lo sentimos </div>`)
-  return alerta
-}
+export const errorFetch = $(`<div class="alert alert-danger" role="alert" id="datos-incorrectos">
+No pudimos obtener los datos de esa fecha y con esa base. Lo sentimos </div>`)
 
 export function agragarGifCargando () {
   const gif = $(`<div class="text-center" id="gif">
