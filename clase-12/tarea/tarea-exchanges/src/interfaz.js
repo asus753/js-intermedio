@@ -1,4 +1,5 @@
 /// <reference types="jquery"/>
+import { CambiosMoneda, CambioMonedaUnica} from './clases.js'
 
 export function añadirBases (respuestaJSON) {
   const lista = $('#listado-bases')
@@ -33,20 +34,24 @@ export function VaciarDatosPrevios () {
   }
 }
 
-export function AgregarTarjetasCambios (respuesta) {
-  Object.keys(respuesta.rates).forEach(moneda => {
-    if (moneda !== respuesta.base) {
-      $('#devolucion-monedas').append(
-        $(`<div class="col">
-                              <div class="card text-center border-dark">
-                                  <p style="margin: 12px;">
-                                      <strong>${moneda} :</strong>
-                                      <label style="margin: 0px;">${respuesta.rates[moneda].toFixed(2)}</label>
-                                  </p>
-                              </div>
-                      </div>`))
-    }
+export function AgregarTarjetasCambios (cambios) {
+  const exchanges = new CambiosMoneda(cambios)
+  
+  Object.entries(exchanges.cambios).forEach(([moneda, valor]) => {
+    const exchangeUnico = new CambioMonedaUnica(moneda, valor)
+
+    $('#devolucion-monedas').append(
+      $(`<div class="col">
+          <div class="card text-center border-dark">
+            <p style="margin: 12px;">
+              <strong>${exchangeUnico.moneda} :</strong>
+              <label style="margin: 0px;">${exchangeUnico.valor.toFixed(2)}</label>
+            </p>
+          </div>
+      </div>`)
+    )
   })
+
 }
 
 export function errorFetch () {
