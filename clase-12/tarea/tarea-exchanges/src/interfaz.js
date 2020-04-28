@@ -52,8 +52,6 @@ export function AgregarTarjetasCambios (cambios) {
     )
   })
 
-}
-
 export const errorFetch = $(`<div class="alert alert-danger" role="alert" id="datos-incorrectos">
 No pudimos obtener los datos de esa fecha y con esa base. Lo sentimos </div>`)
 

@@ -1,5 +1,6 @@
 /// <reference types="jquery"/>
 
+
 import { obtenerNombresBases } from './exchangesAPI.js'
 import {
   añadirBases,
@@ -24,8 +25,8 @@ $('#convertir').click(async () => {
     method: 'GET',
     url: ObtenerURL(),
     success: respuesta => {
-      $('#gif').detach()
-      AgregarTarjetasCambios(respuesta)
+      $('#gif').remove()
+      AgregarTarjetasCambios(respuesta.rates)
     },
     error: () => {
       $('form').append(errorFetch)
