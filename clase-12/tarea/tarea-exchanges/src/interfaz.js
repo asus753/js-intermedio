@@ -34,8 +34,8 @@ export function VaciarDatosPrevios () {
   }
 }
 
-export function AgregarTarjetasCambios (cambios) {
-  const exchanges = new CambiosMoneda(cambios)
+export function AgregarTarjetasCambios (respuestaAPIexchanges) {
+  const exchanges = new CambiosMoneda(respuestaAPIexchanges)
   
   Object.entries(exchanges.cambios).forEach(([moneda, valor]) => {
     const exchangeUnico = new CambioMonedaUnica(moneda, valor)

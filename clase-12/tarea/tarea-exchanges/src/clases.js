@@ -1,6 +1,6 @@
 export class CambiosMoneda {
   constructor (respuestaAPIExchanges) {
-    this.cambios = respuestaAPIExchanges
+    this.cambios = respuestaAPIExchanges.rates
   }
 }
 
