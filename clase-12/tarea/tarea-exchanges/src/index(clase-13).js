@@ -26,7 +26,7 @@ $('#convertir').click(async () => {
     url: ObtenerURL(),
     success: respuesta => {
       $('#gif').remove()
-      AgregarTarjetasCambios(respuesta.rates)
+      AgregarTarjetasCambios(respuesta)
     },
     error: () => {
       $('form').append(errorFetch())
